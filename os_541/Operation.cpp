@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Operation.h"
+#include "global.h"
 
 //·Ö¸î²Ù×÷
 Operation splitOperation(const std::string &s, const char delim)
@@ -17,7 +18,14 @@ Operation splitOperation(const std::string &s, const char delim)
 		if (times == 0)
 			operation.setType(elems[0]);
 		else if (times == 1)
-			operation.setTime(stoi(elems[1]));
+		{
+			if (elems[0] == IT_M)
+				operation.setBlock(stoi(elems[1]));
+			else if (elems[0] == IT_Y)
+				operation.setPriorityNumber(stoi(elems[1]));
+			else
+				operation.setTime(stoi(elems[1]));
+		}
 		else if (times == 2)
 			operation.setFileName(elems[2]);
 		else if (times == 3)
@@ -34,14 +42,28 @@ Operation::Operation()
 	this->time = 0;
 	this->fileName = "";
 	this->fileSize = 0;
+	this->block = 0;
+	this->priorityNumber = 0;
 }
 
-Operation& Operation::operator=(Operation& a)
+Operation::Operation(const Operation& a)
 {
-	this->type = a.getType();
-	this->time = a.getTime();
-	this->fileName = a.getFileName();
-	this->fileSize = a.getFileSize();
+	this->type = a.type;
+	this->time = a.time;
+	this->fileName = a.fileName;
+	this->fileSize = a.fileSize;
+	this->block = a.block;
+	this->priorityNumber = a.priorityNumber;
+}
+
+Operation& Operation::operator=(const Operation& a)
+{
+	this->type = a.type;
+	this->time = a.time;
+	this->fileName = a.fileName;
+	this->fileSize = a.fileSize;
+	this->block = a.block;
+	this->priorityNumber = a.priorityNumber;
 	return *this;
 }
 
@@ -49,7 +71,7 @@ Operation::~Operation()
 {
 }
 
-string Operation::getType()
+string Operation::getType() const
 {
 	return type;
 }
@@ -58,7 +80,7 @@ void Operation::setType(string type)
 	this->type = type;
 }
 
-int Operation::getTime()
+int Operation::getTime() const
 {
 	return time;
 }
@@ -67,7 +89,7 @@ void Operation::setTime(int time)
 	this->time = time;
 }
 
-string Operation::getFileName()
+string Operation::getFileName() const
 {
 	return fileName;
 }
@@ -76,7 +98,7 @@ void Operation::setFileName(string fileName)
 	this->fileName = fileName;
 }
 
-int Operation::getFileSize()
+int Operation::getFileSize() const
 {
 	return fileSize;
 }
@@ -84,4 +106,24 @@ int Operation::getFileSize()
 void Operation::setFileSize(int fileSize)
 {
 	this->fileSize = fileSize;
+}
+
+int Operation::getBlock() const
+{
+	return block;
+}
+
+void Operation::setBlock(int block)
+{
+	this->block = block;
+}
+
+int Operation::getPriorityNumber() const
+{
+	return priorityNumber;
+}
+
+void Operation::setPriorityNumber(int number)
+{
+	priorityNumber = number;
 }

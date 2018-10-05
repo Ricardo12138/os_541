@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\run">
+      <UniqueIdentifier>{0c403e4a-3cda-4938-b181-44230a1a6fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\run">
+      <UniqueIdentifier>{6199ebd4-d2d5-4d7f-8f9d-4ec6b9a84b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\class">
+      <UniqueIdentifier>{1b9304a7-8a77-4d73-aff1-e80cfe63065e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\class">
+      <UniqueIdentifier>{280b0a3e-3dc6-4b8f-81ba-a5b69dcc3c46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\utils">
+      <UniqueIdentifier>{d60e87fc-5cf6-4893-8d42-92befbb78010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\utils">
+      <UniqueIdentifier>{ad6293f1-6975-4354-b852-b43c70339115}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,20 +42,38 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="global.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="ready.h">
+      <Filter>头文件\run</Filter>
+    </ClInclude>
+    <ClInclude Include="run.h">
+      <Filter>头文件\run</Filter>
+    </ClInclude>
+    <ClInclude Include="new.h">
+      <Filter>头文件\run</Filter>
+    </ClInclude>
+    <ClInclude Include="running.h">
+      <Filter>头文件\run</Filter>
+    </ClInclude>
+    <ClInclude Include="terminated.h">
+      <Filter>头文件\run</Filter>
     </ClInclude>
     <ClInclude Include="PCB.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\class</Filter>
     </ClInclude>
     <ClInclude Include="Process.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="scheduleAlgorithm.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\class</Filter>
     </ClInclude>
     <ClInclude Include="Operation.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\class</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="scheduleAlgorithm.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="waiting.h">
+      <Filter>头文件\run</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,17 +83,38 @@
     <ClCompile Include="os_541.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ready.cpp">
+      <Filter>源文件\run</Filter>
+    </ClCompile>
+    <ClCompile Include="run.cpp">
+      <Filter>源文件\run</Filter>
+    </ClCompile>
+    <ClCompile Include="running.cpp">
+      <Filter>源文件\run</Filter>
+    </ClCompile>
+    <ClCompile Include="new.cpp">
+      <Filter>源文件\run</Filter>
+    </ClCompile>
+    <ClCompile Include="terminated.cpp">
+      <Filter>源文件\run</Filter>
+    </ClCompile>
     <ClCompile Include="PCB.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\class</Filter>
     </ClCompile>
     <ClCompile Include="Process.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\class</Filter>
     </ClCompile>
     <ClCompile Include="scheduleAlgorithm.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\utils</Filter>
     </ClCompile>
     <ClCompile Include="Operation.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\class</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>源文件\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="waiting.cpp">
+      <Filter>源文件\run</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

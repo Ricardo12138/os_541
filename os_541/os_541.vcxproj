@@ -139,18 +139,29 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
+    <ClInclude Include="new.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="PCB.h" />
     <ClInclude Include="Process.h" />
+    <ClInclude Include="ready.h" />
+    <ClInclude Include="run.h" />
+    <ClInclude Include="running.h" />
     <ClInclude Include="scheduleAlgorithm.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="terminated.h" />
+    <ClInclude Include="waiting.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="global.cpp" />
+    <ClCompile Include="new.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="os_541.cpp" />
     <ClCompile Include="PCB.cpp" />
     <ClCompile Include="Process.cpp" />
+    <ClCompile Include="ready.cpp" />
+    <ClCompile Include="run.cpp" />
+    <ClCompile Include="running.cpp" />
     <ClCompile Include="scheduleAlgorithm.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -158,6 +169,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="terminated.cpp" />
+    <ClCompile Include="waiting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
