@@ -75,6 +75,9 @@
     <ClInclude Include="waiting.h">
       <Filter>头文件\run</Filter>
     </ClInclude>
+    <ClInclude Include="memory.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="waiting.cpp">
       <Filter>源文件\run</Filter>
+    </ClCompile>
+    <ClCompile Include="memory.cpp">
+      <Filter>源文件\utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
