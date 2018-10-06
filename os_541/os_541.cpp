@@ -71,26 +71,28 @@ int main()
 	
 	node root;
 	node *tempnode = new node;
-	int choose=0;
+	int choose = 0;
 
 	root = Create();
-	cout << root.getName()<<endl;
+	cout << root.getName() << endl;
 	tempnode = &root;
-	while(true){
+	while (true) {
 		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3" << endl;
 		cin >> choose;
 		switch (choose) {
-		case 1 :
+		case 1:
 			Add(*tempnode);
 			tempnode = (*tempnode).getChild();
 			cout << tempnode->getName() << endl;
 			break;
-		case 2 :
+		case 2:
 			*tempnode = *tempnode->getParent();
 			Add(*tempnode);
 			tempnode = (*tempnode).getChild();
-			cout << tempnode->getName() << endl; break;
-		case 3 :
+			cout << tempnode->getName() << endl;
+			break;
+		case 3:
+			//bool i = false;
 			cout << "找到？" << Search(root, *tempnode) << endl;
 			T = 0;
 			break;

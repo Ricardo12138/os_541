@@ -138,6 +138,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="file.h" />
+    <ClInclude Include="file_mangement.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="memory.h" />
     <ClInclude Include="new.h" />
@@ -154,6 +156,8 @@
     <ClInclude Include="waiting.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="file.cpp" />
+    <ClCompile Include="file_mangement.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="new.cpp" />
     <ClCompile Include="Operation.cpp" />

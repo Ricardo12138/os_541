@@ -1,4 +1,7 @@
 #include "terminated.h"
+#include"stdafx.h"
+#include"global.h"
+#include"memory.h"
 
 void terminated()
 {
@@ -8,7 +11,7 @@ void terminated()
 		{
 			Process pro = terminatedQueue.front();
 			PCB pcb = pro.getPCB();
-			if (recycle(pcb.getaddr))
+			if (recycle(pcb.getaddr()))
 			{
 				cout << "recycle error!" << endl;
 				return;

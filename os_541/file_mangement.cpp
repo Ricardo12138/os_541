@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "file_mangement.h"
-
+#include"global.h"
 
 void Delete(node N)
 {

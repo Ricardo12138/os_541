@@ -1,4 +1,3 @@
-#include "file.h"
 #include"stdafx.h"
 #include "file.h"
 

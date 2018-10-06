@@ -1,5 +1,8 @@
 #include "new.h"
-
+#include"stdafx.h"
+#include"Process.h"
+#include"global.h"
+#include"memory.h"
 /*创建时内存空间为0~160kb随机数
 **优先级为0~5的随机数
 **0为优先级最低，5为优先级最高
@@ -115,7 +118,7 @@ void new_detect()
 		if (!newQueue.empty())
 		{
 			int memory,start_addr;
-			Process pro = newQueue.front;
+			Process pro = newQueue.front();
 			PCB pcb = pro.getPCB();
 			memory = pcb.getMemorySpace();
 			start_addr = allocation(memory);
@@ -126,8 +129,8 @@ void new_detect()
 			}
 			else
 			{
-				pcb.setaddr = start_addr;
-				pcb.setProcessState = 1;
+				pcb.setaddr(start_addr);
+				pcb.setProcessState(1);
 				pro.setPCB(pcb);
 				readyQueue.push_back(pro);
 				newQueue.pop_front();

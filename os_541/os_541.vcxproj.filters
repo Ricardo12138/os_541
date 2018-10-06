@@ -31,6 +31,12 @@
     <Filter Include="源文件\utils">
       <UniqueIdentifier>{ad6293f1-6975-4354-b852-b43c70339115}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\file">
+      <UniqueIdentifier>{035e4bba-87e2-44ca-8de9-690327fb8014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\file">
+      <UniqueIdentifier>{03dae67f-c03a-4362-b302-765be73f8e69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -78,6 +84,12 @@
     <ClInclude Include="memory.h">
       <Filter>头文件\utils</Filter>
     </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>头文件\class</Filter>
+    </ClInclude>
+    <ClInclude Include="file_mangement.h">
+      <Filter>头文件\file</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -121,6 +133,12 @@
     </ClCompile>
     <ClCompile Include="memory.cpp">
       <Filter>源文件\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="file.cpp">
+      <Filter>源文件\class</Filter>
+    </ClCompile>
+    <ClCompile Include="file_mangement.cpp">
+      <Filter>源文件\file</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
