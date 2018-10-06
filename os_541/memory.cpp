@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "memory.h"
 
 cPartition *head = NULL;	//连续分区的头指针	
@@ -10,7 +11,7 @@ STATUS initialization()
 {
 	if (!(head = (cPartition*)malloc(sizeof(cPartition))))
 	{
-		return ERROR;
+		return WRONG;
 	}
 	head->size = MAXSIZE;
 	head->state = FREE;
@@ -44,7 +45,7 @@ STATUS allocation(int request)
 
 	if (!best)
 	{
-		return ERROR;
+		return WRONG;
 	}
 	else
 	{
@@ -83,7 +84,7 @@ STATUS recycle(int address)
 
 	if (!p)
 	{
-		return ERROR;
+		return WRONG;
 	}
 
 	cPartition *next = p->next;

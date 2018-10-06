@@ -1,9 +1,7 @@
-#include "stdafx.h"
-
 #define BUSY 1
 #define FREE 0
 #define OK 1
-#define ERROR -1
+#define WRONG -1
 #define MAXSIZE 640			//内存容量为640KB,若要更改,请在这更改
 typedef int STATUS;
 
@@ -25,3 +23,7 @@ typedef struct useCondition
 	useCondition *next;		//下一个
 }useCondition;
 
+STATUS initialization();
+STATUS allocation(int request);
+STATUS recycle(int address);
+useCondition* show();

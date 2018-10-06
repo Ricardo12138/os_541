@@ -8,7 +8,8 @@ private:
 	int processState;	//进程当前状态
 	int pc;				//程序计数器
 	int memorySpace;	//内存空间
-	int priority; //进程优先级
+	int priority;		//进程优先级
+	int start_addr;
 	vector<Operation> jobs;	//对应任务
 	pair<int, int> nowJob; //正在执行的任务或刚开始的任务，1：第几个，2：剩的时间
 
@@ -27,6 +28,9 @@ public:
 
 	int getPc() const;
 	void setPc(int pc);
+
+	int getaddr() const;
+	void setaddr(int addr);
 
 	int getMemorySpace() const;
 	void setMemorySpace(int space);

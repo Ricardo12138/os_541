@@ -9,8 +9,9 @@ PCB::PCB()
 	srand(seed++);
 	this->processId = rand()%10000;	//10000以内的随机数作为进程ID
 	this->processState = -1;		//默认进程状态为-1，表示未被成功new
-	this->pc = 0;
-	this->memorySpace = 0;
+	this->pc = 0;					
+	this->memorySpace = 0;			
+	this->start_addr = -1;
 	this->priority = 0;				//默认优先级为最低优先级0
 
 	//默认使用job1作为默认任务
@@ -33,6 +34,7 @@ PCB::PCB(const vector<string> job)
 	this->processState = -1;		//默认进程状态为-1，表示未被成功new
 	this->pc = 0;
 	this->memorySpace = 0;
+	this->start_addr = -1;
 	this->priority = 0;				//默认优先级为最低优先级0
 	
 	this->jobs.clear();//清空jobs
@@ -55,6 +57,7 @@ PCB& PCB::operator=(const PCB& a)
 	this->processState = a.processState;
 	this->pc = a.pc;
 	this->memorySpace = a.memorySpace;
+	this->start_addr = a.start_addr;
 	this->priority = a.priority;
 	this->jobs = a.jobs;
 	this->nowJob.first = a.nowJob.first;
@@ -68,6 +71,7 @@ PCB::PCB(const PCB& a)
 	this->processState = a.processState;
 	this->pc = a.pc;
 	this->memorySpace = a.memorySpace;
+	this->start_addr = a.start_addr;
 	this->priority = a.priority;
 	this->jobs = a.jobs;
 	this->nowJob.first = a.nowJob.first;
@@ -99,6 +103,14 @@ int PCB::getPc() const{
 
 void PCB::setPc(int pc) {
 	this->pc = pc;
+}
+
+int PCB::getaddr() const {
+	return start_addr;
+}
+
+void PCB::setaddr(int addr) {
+	this->start_addr = addr;
 }
 
 int PCB::getMemorySpace() const{
@@ -153,6 +165,7 @@ void PCB::show()
 		<< "processState: " << this->processState << endl
 		<< "pc: " + this->pc << endl
 		<< "memorySpace: " << this->memorySpace << endl
+		<< "start address: " << this->start_addr << endl
 		<< "priority: " << this->priority << endl;
 	//输出job
 	for (int i = 0; i < jobs.size(); i++)
