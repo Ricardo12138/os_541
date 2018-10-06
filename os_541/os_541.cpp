@@ -65,5 +65,42 @@ int main()
 
 
 	return 0;
+
+	//薛顺国的main
+	/*
+	node root;
+	node *tempnode = new node;
+	int choose=0;
+
+	root = Create();
+	cout << root.getName()<<endl;
+	tempnode = &root;
+	while(true){
+		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3" << endl;
+		cin >> choose;
+		switch (choose) {
+		case 1 :
+			Add(*tempnode);
+			tempnode = (*tempnode).getChild();
+			cout << tempnode->getName() << endl;
+			break;
+		case 2 :
+			*tempnode = *tempnode->getParent();
+			Add(*tempnode);
+			tempnode = (*tempnode).getChild();
+			cout << tempnode->getName() << endl; break;
+		case 3 :
+			Search(root);
+			break;
+		default:break;
+		}
+	//Add(*tempnode);
+	//tempnode = (*tempnode).getChild();
+	//cout << tempnode->getName() << endl;
+	}
+
+	getchar();
+	return 0;
+	*/
 }
 
