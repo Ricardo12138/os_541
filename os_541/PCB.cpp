@@ -5,7 +5,7 @@
 
 PCB::PCB()
 {
-	vector<string> JOB1 = { "M 4", "Y 2", "C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2", "Q" };
+	vector<string> JOB1 = {"C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2", "Q" };
 	srand(seed++);
 	this->processId = rand()%10000;	//10000以内的随机数作为进程ID
 	this->processState = -1;		//默认进程状态为-1，表示未被成功new
@@ -22,7 +22,8 @@ PCB::PCB()
 	pair<int, int> nowjob;
 	nowjob.first = 0;
 	nowjob.second = jobs[0].getTime();
-	this->nowJob = nowJob;
+	this->nowJob.first = nowjob.first;
+	this->nowJob.second = nowjob.second;
 }
 
 PCB::PCB(const vector<string> job)
@@ -44,7 +45,8 @@ PCB::PCB(const vector<string> job)
 	pair<int, int> nowjob;
 	nowjob.first = 0;
 	nowjob.second = jobs[0].getTime();
-	this->nowJob = nowJob;
+	this->nowJob.first = nowjob.first;
+	this->nowJob.second = nowjob.second;
 }
 
 PCB& PCB::operator=(const PCB& a)
@@ -55,7 +57,8 @@ PCB& PCB::operator=(const PCB& a)
 	this->memorySpace = a.memorySpace;
 	this->priority = a.priority;
 	this->jobs = a.jobs;
-	this->nowJob = a.nowJob;
+	this->nowJob.first = a.nowJob.first;
+	this->nowJob.second = a.nowJob.second;
 	return *this;
 }
 
@@ -67,7 +70,8 @@ PCB::PCB(const PCB& a)
 	this->memorySpace = a.memorySpace;
 	this->priority = a.priority;
 	this->jobs = a.jobs;
-	this->nowJob = a.nowJob;
+	this->nowJob.first = a.nowJob.first;
+	this->nowJob.second = a.nowJob.second;
 }
 PCB::~PCB()
 {
@@ -127,6 +131,8 @@ void PCB::setJobs(vector<string> jobs)
 		Operation opt = splitOperation(str, ' ');
 		this->jobs.push_back(opt);
 	}
+	this->nowJob.first = 0;
+	this->nowJob.second = this->jobs[0].getTime();
 }
 
 pair<int, int> PCB::getNowJob() const
@@ -136,7 +142,8 @@ pair<int, int> PCB::getNowJob() const
 
 void PCB::setNowJob(pair<int, int> job)
 {
-	nowJob = job;
+	nowJob.first = job.first;
+	nowJob.second = job.second;
 }
 
 void PCB::show()

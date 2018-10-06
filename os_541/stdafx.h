@@ -19,8 +19,8 @@
 #include <algorithm>
 #include <sstream>
 #include <array>
-#include <time.h>
-#include <stdlib.h>
+#include <ctime>
+#include <cstdlib>
 #include <set>
 
 

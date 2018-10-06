@@ -16,11 +16,14 @@ const int waitingState = 3;
 const int terminatedState = 4;
 
 //任务，进程默认任务为job1。详情看PCB构造函数。
-const vector<string> job1 = { "M 4", "Y 2", "C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2", "Q"};
-const vector<string> job2 = { "M 6", "Y 3", "C 3", "K 10", "C 2", "W 5 b 40", "C 5", "P 20", "C 3", "Q" };
+const vector<string> job1 = { "C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2", "Q"};
+const vector<string> job2 = { "C 3", "K 10", "C 2", "W 5 b 40", "C 5", "P 20", "C 3", "Q" };
+const vector<string> job3 = { "K 4", "C 3", "P 5", "Q" };
+const vector<string> job4 = { "C 9", "C 5", "C 10", "Q" };
+const vector<string> job5 = { "R 4 a 10", "I", "W 4 a 10", "Q" };
 
 //系统时钟
-const int TIME = 500;
+const int TIME = 1000;
 
 //时间种子
 static time_t seed = time(0);
