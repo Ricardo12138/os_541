@@ -90,6 +90,9 @@
     <ClInclude Include="file_mangement.h">
       <Filter>头文件\file</Filter>
     </ClInclude>
+    <ClInclude Include="TC_ThreadQueue.h">
+      <Filter>头文件\class</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

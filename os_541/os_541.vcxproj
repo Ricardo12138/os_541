@@ -152,6 +152,7 @@
     <ClInclude Include="scheduleAlgorithm.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TC_ThreadQueue.h" />
     <ClInclude Include="terminated.h" />
     <ClInclude Include="waiting.h" />
   </ItemGroup>
