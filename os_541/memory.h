@@ -23,7 +23,28 @@ typedef struct useCondition
 	useCondition *next;		//下一个
 }useCondition;
 
+/*
+** 连续分区初始化
+** 初始化成功返回1，否则返回-1
+*/
 STATUS initialization();
+
+/*
+** 连续分区分配内存,采用最佳匹配法
+** 接收参数：请求内存的大小
+** 分配成功返回该内存块的首地址，否则返回-1
+*/
 STATUS allocation(int request);
+
+/*
+** 连续分区回收内存
+** 接收参数：内存块的起始地址
+** 回收成功返回1，否则返回-1
+*/
 STATUS recycle(int address);
+
+/*
+** 内存的使用情况
+** 用链表形式返回内存的使用情况
+*/
 useCondition* show();
