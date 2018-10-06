@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "global.h"
 
+//**
 void eraseQueueElem(deque<Process>& dq, Process process)
 {
 	auto last = find(begin(dq), end(dq), process);
