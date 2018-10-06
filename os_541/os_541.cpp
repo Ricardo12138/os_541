@@ -11,13 +11,14 @@
 #include "run.h"
 #include<iostream>
 #include<vector>
+#include"file_mangement.h"
 
 using namespace std;
 
 //vector<string> job1 = { "M 4", "Y 2", "C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2", "Q" };
 int main()
 {
-	PCB pcb1(job1);
+	/*PCB pcb1(job1);
 	pcb1.setPriority(0);
 
 	PCB pcb2;
@@ -65,9 +66,9 @@ int main()
 
 
 	return 0;
-
+	*/
 	//Ñ¦Ë³¹úµÄmain
-	/*
+	
 	node root;
 	node *tempnode = new node;
 	int choose=0;
@@ -90,9 +91,10 @@ int main()
 			tempnode = (*tempnode).getChild();
 			cout << tempnode->getName() << endl; break;
 		case 3 :
-			Search(root);
+			cout << "ÕÒµ½£¿" << Search(root, *tempnode) << endl;
+			T = 0;
 			break;
-		default:break;
+		default:;
 		}
 	//Add(*tempnode);
 	//tempnode = (*tempnode).getChild();
@@ -101,6 +103,6 @@ int main()
 
 	getchar();
 	return 0;
-	*/
+	
 }
 

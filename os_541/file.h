@@ -13,7 +13,7 @@ private:
 public:
 	node();
 	node& operator=(const node& N);
-	//node*& operator=(const node*& N);
+	bool operator==(node& N);
 	~node();
 
 	char* getName();

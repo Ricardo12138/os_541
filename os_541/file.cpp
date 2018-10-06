@@ -1,3 +1,4 @@
+#include "file.h"
 #include"stdafx.h"
 #include "file.h"
 
@@ -21,6 +22,13 @@ node & node::operator=(const node & N)
 	this->bro_node = N.bro_node;
 	this->parent = N.parent;
 	return *this;
+}
+bool node::operator==(node & N)
+{
+	int i = strcmp(this->getName(), N.getName());
+	if (i == 0)
+		return true;
+	return false;
 }
 /*
 node *& node::operator=(const node *& N)

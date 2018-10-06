@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "file_mangement.h"
 
+
 void Delete(node N)
 {
 	if (N.getChild())
 		Delete(*N.getChild());
 	if (N.getBro_node())
 		Delete(*N.getBro_node());
+	Size = N.getSize() + Size;
 	delete &N;
 }
 
@@ -52,8 +54,17 @@ void Add(node& N)
 	cout << "请输入(0:文件名；1：目录名)：";
 	cin >> type;
 	if (type == 0) {
+		cout << "文件剩余大小为：" << Size << endl;
 		cout << "文件大小：";
 		cin >> size;
+		while (Size < size)
+		{
+			cout << "文件剩余大小为：" << Size << endl;
+			cout << "请重新输入：" << endl;
+			cout << "文件大小：";
+			cin >> size;
+		}
+		Size = Size - size;
 	}
 	else size = 0;
 	state = 0;
@@ -64,9 +75,9 @@ void Add(node& N)
 
 
 	//找上一个兄弟
-	if (N.getChild() == NULL)	
+	if (N.getChild() == NULL)
 		N.setChild(newnode);
-		
+
 	else {
 		tempnode = N.getChild();
 		while (tempnode->getBro_node() != NULL)
@@ -75,10 +86,17 @@ void Add(node& N)
 	}
 }
 
-void Search(node N) {
+bool Search(node N, node target) {
+	if (N == target)
+	{
+		T = 1;
+		return T;
+	}
+
 	if (N.getChild())
-		Search(*N.getChild());
-	if(N.getBro_node())
-		Search(*N.getBro_node());
-	cout << N.getName() << endl;
+		Search(*N.getChild(), target);
+	if (N.getBro_node())
+		Search(*N.getBro_node(), target);
+	//cout << N.getName() << endl;
+	return T;
 }
