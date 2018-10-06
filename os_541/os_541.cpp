@@ -69,13 +69,13 @@ int main()
 	*/
 	//薛顺国的main
 	
-	node root;
+	//node root;
 	node *tempnode = new node;
 	int choose = 0;
 
-	root = Create();
-	cout << root.getName() << endl;
-	tempnode = &root;
+	Root = Create();
+	cout << Root.getName() << endl;
+	tempnode = &Root;
 	while (true) {
 		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3" << endl;
 		cin >> choose;
@@ -93,7 +93,7 @@ int main()
 			break;
 		case 3:
 			//bool i = false;
-			cout << "找到？" << Search(root, *tempnode) << endl;
+			cout << "找到？" << Search(Root, "ro") << endl;
 			T = 0;
 			break;
 		default:;

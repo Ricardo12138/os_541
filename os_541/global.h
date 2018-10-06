@@ -1,5 +1,6 @@
 #pragma once
 #include "Process.h"
+#include"file.h"
 
 //×´Ì¬¶ÓÁÐ
 extern deque<Process> newQueue;
@@ -43,3 +44,6 @@ const string IT_W = "W";
 const string IT_Q = "Q";
 const string IT_K = "K";
 const string IT_P = "P";
+
+
+extern node Root;

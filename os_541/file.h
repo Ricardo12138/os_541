@@ -6,7 +6,7 @@ private:
 	char name[10];//文件名/目录名
 	bool type;// 0      /1
 	int size;//文件大小，目录名时为0
-	int state;//空闲：0/占用：1,默认为0
+	int state;//空闲：0/读：1/写：2,默认为0
 	node *child;//文件名时为null
 	node *bro_node;
 	node *parent;//父节点
