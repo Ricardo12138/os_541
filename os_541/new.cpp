@@ -25,6 +25,7 @@ void produce()
 	{
 		pcb.setProcessState(0);
 		process.setPCB(pcb);
+		//process.show();
 		newQueue.push_back(process);
 		return; 
 	}
@@ -33,6 +34,7 @@ void produce()
 	{
 		pcb.setProcessState(0);
 		process.setPCB(pcb);
+		//process.show();
 		newQueue.push_back(process);
 	}
 	else
@@ -40,6 +42,7 @@ void produce()
 		pcb.setProcessState(1);
 		pcb.setaddr(start_addr);
 		process.setPCB(pcb);
+		//process.show();
 		readyQueue.push_back(process);
 	}
 }
@@ -58,6 +61,7 @@ void produce(int priority)
 	{
 		pcb.setProcessState(0);
 		process.setPCB(pcb);
+		//process.show();
 		newQueue.push_back(process);
 		return;
 	}
@@ -66,6 +70,7 @@ void produce(int priority)
 	{
 		pcb.setProcessState(0);
 		process.setPCB(pcb);
+		//process.show();
 		newQueue.push_back(process);
 	}
 	else
@@ -73,6 +78,7 @@ void produce(int priority)
 		pcb.setProcessState(1);
 		pcb.setaddr(start_addr);
 		process.setPCB(pcb);
+		//process.show();
 		readyQueue.push_back(process);
 	}
 }
@@ -91,6 +97,7 @@ void produce(vector<string> job)
 	{
 		pcb.setProcessState(0);
 		process.setPCB(pcb);
+		//process.show();
 		newQueue.push_back(process);
 		return;
 	}
@@ -99,6 +106,7 @@ void produce(vector<string> job)
 	{
 		pcb.setProcessState(0);
 		process.setPCB(pcb);
+		//process.show();
 		newQueue.push_back(process);
 	}
 	else
@@ -106,6 +114,7 @@ void produce(vector<string> job)
 		pcb.setProcessState(1);
 		pcb.setaddr(start_addr);
 		process.setPCB(pcb);
+		//process.show();
 		readyQueue.push_back(process);
 	}
 }

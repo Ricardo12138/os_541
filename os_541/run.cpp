@@ -1,18 +1,25 @@
 #include "run.h"
 #include "stdafx.h"
 #include "Process.h"
+#include "new.h"
 #include "ready.h"
 #include "running.h"
 #include "global.h"
-
+#include "waiting.h"
+#include "terminated.h"
 void run()
 {
-	thread readyToRunningThread(readyToRunning, "FCFS");
-	thread runningToReadyThread(running, "FCFS");
-	
+	thread newThread(new_detect);
+	thread readyThread(ready, "FCFS");
+	thread runningThread(running);
+	thread waitingThread(waiting);
+	thread terminatedThread(terminated);
 
-	runningToReadyThread.join();
-	runningToReadyThread.join();
+	newThread.join();
+	readyThread.join();
+	runningThread.join();
+	waitingThread.join();
+	terminatedThread.join();
 }
 
 
@@ -24,7 +31,7 @@ void hello1()
 		Process process;
 		readyQueue.push_back(process);
 	}
-		
+
 }
 
 void hello2()

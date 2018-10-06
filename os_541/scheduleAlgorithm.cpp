@@ -9,7 +9,7 @@ struct {
 		PCB bPCB = b.getPCB();
 		int aPriority = aPCB.getPriority();
 		int bPriority = bPCB.getPriority();
-		return aPriority > bPriority;
+		return aPriority < bPriority;
 	}
 } prioritySchedule;
 

@@ -4,6 +4,7 @@
 #include "PCB.h"
 #include "global.h"
 #include "Operation.h"
+#include "running.h"
 
 void waiting()
 {
@@ -19,14 +20,31 @@ void waiting()
 			Operation opt = pcb.getJobs()[id];
 			if (opt.getType() == IT_K)//键盘输入
 			{
-				Sleep(lastTime);//模拟IO输入的时间
+				Sleep(lastTime * TIME);//模拟IO输入的时间
+				cout << pcb.getProcessId() << " 键盘输入结束" << endl;
+				nowJob.first = id + 1;
+				nowJob.second = (pcb.getJobs())[id + 1].getTime();
+				pcb.setNowJob(nowJob);
+				process.setPCB(pcb);
+				process.setFinishIOFlag(true);
 				Process newProcess = process;
 				readyQueue.push_back(newProcess);
-				
+				eraseQueueElem(waitingQueue, process);
+
 			}
 			else if (opt.getType() == IT_P)//打印机输出
 			{
-
+				
+				Sleep(lastTime * TIME);//模拟IO输入的时间
+				cout << pcb.getProcessId() << " 打印机输出结束" << endl;
+				nowJob.first = id + 1;
+				nowJob.second = (pcb.getJobs())[id + 1].getTime();
+				pcb.setNowJob(nowJob);
+				process.setPCB(pcb);
+				process.setFinishIOFlag(true);
+				Process newProcess = process;
+				readyQueue.push_back(newProcess);
+				eraseQueueElem(waitingQueue, process);
 			}
 			else
 			{
@@ -34,5 +52,5 @@ void waiting()
 			}
 		}
 	}
-	
+
 }

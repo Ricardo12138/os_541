@@ -29,7 +29,7 @@ const int TIME = 1000;
 static time_t seed = time(0);
 
 //调度算法
-const string SA_PRIORITY = "PSA"; //优先级调度
+const string SA_PRIORITY = "PRIORITY"; //优先级调度
 const string SA_FCFS = "FCFS"; //先来先服务
 const string SA_RR = "RR"; //轮询
 

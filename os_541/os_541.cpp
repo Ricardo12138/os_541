@@ -12,63 +12,16 @@
 #include<iostream>
 #include<vector>
 #include"file_mangement.h"
-
+#include "new.h"
+#include "memory.h"
 using namespace std;
 
-//vector<string> job1 = { "M 4", "Y 2", "C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2", "Q" };
 int main()
 {
-	/*PCB pcb1(job1);
-	pcb1.setPriority(0);
-
-	PCB pcb2;
-	pcb2.setPriority(1);
-	pcb2.setJobs(job2);
-
-	//PCB pcb3;
-	//pcb3.setPriority(2);
-
-	Process process1;
-	process1.setPCB(pcb1);
 	
-	Process process2;
-	process2.setPCB(pcb2);
 	
-	//Process process3;
-	//process3.setPCB(pcb3);
-	
-	//Process process4;
-	//process4 = process2;
-	
-	readyQueue.push_back(process1);
-	readyQueue.push_back(process2);
-
-	cout << "***" << readyQueue.size() << endl;
-	cout << "|||" << terminatedQueue.size() << endl;
-	
-	//run1();
-	run();//启动线程
-
-	while (!terminatedQueue.empty())
-	{
-		Process p = terminatedQueue.front();
-		terminatedQueue.pop_front();
-		p.show();
-	}
-
-	//cout << process1.getPCB().getProcessId() << endl;
-	//cout << process2.getPCB().getProcessId() << endl;
-	//cout << process3.getPCB().getProcessId() << endl;
-	//cout << process4.getPCB().getProcessId() << endl;
-	//cout << runningQueue.size() << endl;
-	//eraseQueueElem(runningQueue, process2);
-	//cout << runningQueue.size() << endl;
-
-
-	return 0;
-	*/
 	//薛顺国的main
-	
+	/*
 	node root;
 	node *tempnode = new node;
 	int choose = 0;
@@ -103,7 +56,63 @@ int main()
 	//cout << tempnode->getName() << endl;
 	}
 
-	getchar();
+	getchar();*/
+
+	/**
+	 *cyw main
+	 */
+	/*PCB pcb1(job1);
+	pcb1.setPriority(0);
+	PCB pcb2;
+	pcb2.setPriority(3);
+	pcb2.setJobs(job2);
+
+	PCB pcb3(job3);
+	pcb3.setPriority(3);
+
+	PCB pcb4(job4);
+	pcb4.setPriority(2);
+
+	PCB pcb5(job5);
+	pcb5.setPriority(4);
+
+	Process process1;
+	process1.setPCB(pcb1);
+
+	Process process2;
+	process2.setPCB(pcb2);
+
+
+	Process process3;
+	process3.setPCB(pcb3);
+
+	Process process4;
+	process4.setPCB(pcb4);
+
+	Process process5;
+	process5.setPCB(pcb5);
+
+	readyQueue.push_back(process1);
+	readyQueue.push_back(process2);
+	readyQueue.push_back(process3);
+	readyQueue.push_back(process4);
+	readyQueue.push_back(process5);*/
+
+	initialization();
+	produce(job1);
+	produce(job2);
+	produce(job3);
+	produce(job4);
+	produce(job5);
+	//run1();
+	run();//启动线程 
+
+	while (!terminatedQueue.empty())
+	{
+		Process p = terminatedQueue.front();
+		terminatedQueue.pop_front();
+		p.show();
+	}
 	return 0;
 	
 }
