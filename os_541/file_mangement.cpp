@@ -111,6 +111,23 @@ bool Search(node N, string target) {
 	return T;
 }
 
+bool SearchFile(node N, string target) {
+	char buf[10];
+	strcpy(buf, target.c_str());
+	if (strcmp(N.getName(), buf) == 0 && N.getType() == 0)
+	{
+		T = 1;
+		return T;
+	}
+
+	if (N.getChild())
+		Search(*N.getChild(), target);
+	if (N.getBro_node())
+		Search(*N.getBro_node(), target);
+	//cout << N.getName() << endl;
+	return T;
+}
+
 void Write(node N, string filename, int time, int size)
 {
 	char buf[10];
@@ -119,7 +136,7 @@ void Write(node N, string filename, int time, int size)
 		Write(*N.getChild(),filename,time,size);
 	if(N.getBro_node())
 		Write(*N.getBro_node(), filename, time, size);
-	if (strcmp(N.getName() , buf) == 0)
+	if (strcmp(N.getName() , buf) == 0 && N.getType() == 0)
 	{
 		N.setState(2);
 		Sleep(time);
@@ -136,7 +153,7 @@ void Read(node N, string filename, int time)
 		Read(*N.getChild(), filename, time);
 	if (N.getBro_node())
 		Read(*N.getBro_node(), filename, time);
-	if (strcmp(N.getName() , buf) == 0)
+	if (strcmp(N.getName() , buf) == 0 && N.getType() == 0)
 	{
 		N.setState(1);
 		Sleep(time);
@@ -145,7 +162,7 @@ void Read(node N, string filename, int time)
 }
 
 void fileWrite(string filename, int time, int size) {
-	int result = Search(Root, filename);
+	int result = SearchFile(Root, filename);
 	if (result == 1)
 		Write(Root, filename, time, size);
 	else {
@@ -156,7 +173,7 @@ void fileWrite(string filename, int time, int size) {
 
 bool fileRead(string filename, int time)
 {
-	int result = Search(Root, filename);
+	int result = SearchFile(Root, filename);
 	if (result == 1) {
 		Read(Root, filename, time);
 		return true;
