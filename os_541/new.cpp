@@ -29,7 +29,7 @@ void produce()
 		newQueue.push_back(process);
 		return; 
 	}
-	start_addr = allocation(memory_space);
+	start_addr = allocation(memory_space, pcb.getProcessId());
 	if (start_addr == -1)
 	{
 		pcb.setProcessState(0);
@@ -65,7 +65,7 @@ void produce(int priority)
 		newQueue.push_back(process);
 		return;
 	}
-	start_addr = allocation(memory_space);
+	start_addr = allocation(memory_space, pcb.getProcessId());
 	if (start_addr == -1)
 	{
 		pcb.setProcessState(0);
@@ -101,7 +101,7 @@ void produce(vector<string> job)
 		newQueue.push_back(process);
 		return;
 	}
-	start_addr = allocation(memory_space);
+	start_addr = allocation(memory_space, pcb.getProcessId());
 	if (start_addr == -1)
 	{
 		pcb.setProcessState(0);
@@ -130,7 +130,7 @@ void new_detect()
 			Process pro = newQueue.front();
 			PCB pcb = pro.getPCB();
 			memory = pcb.getMemorySpace();
-			start_addr = allocation(memory);
+			start_addr = allocation(memory,pcb.getProcessId());
 			if (start_addr == -1)
 			{
 				newQueue.push_back(pro);
