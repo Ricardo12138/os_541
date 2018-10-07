@@ -30,7 +30,7 @@ int main()
 	cout << Root.getName() << endl;
 	tempnode = &Root;
 	while (true) {
-		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3;删除：4" << endl;
+		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3;删除：4;写文件：5" << endl;
 		cin >> choose;
 		switch (choose) {
 		case 1:
@@ -51,6 +51,9 @@ int main()
 			break;
 		case 4:
 			fileDelete(*Root.getChild());
+			break;
+		case 5 :
+			fileWrite("gg", 5, 5);
 			break;
 		default:;
 		}

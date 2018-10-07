@@ -10,9 +10,11 @@ void Delete(node &N);
 
 void fileDelete(node &N);
 
-node Create();//根节点
+node Create();//创建根节点
 
-void Add(node &N);//N表示父节点
+node * Add(node &N);//N表示父节点
+
+void Addtxt(node& N, string filename);//找文件没找到时默认添加
 
 bool Search(node N, string target);//遍历文件名/目录名
 
