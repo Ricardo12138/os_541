@@ -21,7 +21,7 @@ int main()
 	
 	
 	//薛顺国的main
-	/*
+	
 	node root;
 	node *tempnode = new node;
 	int choose = 0;
@@ -30,7 +30,7 @@ int main()
 	cout << Root.getName() << endl;
 	tempnode = &Root;
 	while (true) {
-		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3" << endl;
+		cout << "当前目录下创建：1；当前目录的兄弟：2；遍历：3;删除：4" << endl;
 		cin >> choose;
 		switch (choose) {
 		case 1:
@@ -39,15 +39,18 @@ int main()
 			cout << tempnode->getName() << endl;
 			break;
 		case 2:
-			*tempnode = *tempnode->getParent();
+			tempnode = (*tempnode).getParent();
 			Add(*tempnode);
 			tempnode = (*tempnode).getChild();
 			cout << tempnode->getName() << endl;
 			break;
 		case 3:
 			//bool i = false;
-			cout << "找到？" << Search(Root, "ro") << endl;
+			cout << "找到？" << Search(Root, "aaa") << endl;
 			T = 0;
+			break;
+		case 4:
+			fileDelete(*Root.getChild());
 			break;
 		default:;
 		}
@@ -56,7 +59,7 @@ int main()
 	//cout << tempnode->getName() << endl;
 	}
 
-	getchar();*/
+	getchar();
 
 	/**
 	 *cyw main
@@ -106,14 +109,14 @@ int main()
 	produce(job5);
 	
 	//run1();
-	run();//启动线程 
+	/*run();//启动线程 
 
 	while (!terminatedQueue.empty())
 	{
 		Process p = terminatedQueue.front();
 		terminatedQueue.pop_front();
 		p.show();
-	}
+	}*/
 	return 0;
 	
 }

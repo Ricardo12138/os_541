@@ -2,22 +2,48 @@
 #include "file_mangement.h"
 #include"global.h"
 
-void Delete(node N)
+void Delete(node &N)
 {
-	if (N.getChild())
-		Delete(*N.getChild());
-	Size = N.getSize() + Size;
+		if (N.getBro_node())
+			Delete(*N.getBro_node());
+		if (N.getChild())
+			Delete(*N.getChild());
 
-	if (N.getParent()->getChild()->getName() == N.getName())
-		N.getParent()->setChild(N.getBro_node());
-	else {
-		node *tempnode = N.getParent()->getChild();
-		while (tempnode->getBro_node()->getName() == N.getName())
-			tempnode = tempnode->getBro_node();
-		tempnode->setBro_node(N.getBro_node());
-	}
-
+		if (N.getState() == 0)
+			Size = N.getSize() + Size;
+		if (N.getParent())
+		{
+			if (N.getParent()->getChild()->getName() == N.getName())//是父亲的第一个孩子
+				N.getParent()->setChild(N.getBro_node());
+			else {
+				node *tempnode = N.getParent()->getChild();
+				while (tempnode->getBro_node()->getName() == N.getName())
+					tempnode = tempnode->getBro_node();
+				tempnode->setBro_node(N.getBro_node());
+			}
+		}
+	N.setBro_node(NULL);
+	N.setChild(NULL);
 	delete &N;
+}
+
+void fileDelete(node &N)
+{
+	if (N.getParent() == NULL)
+		Delete(N);
+	else {
+		if (strcmp(N.getParent()->getChild()->getName() ,N.getName()) == 0)
+		{
+			N.getParent()->setChild(N.getBro_node());
+			N.setBro_node(NULL);
+		}
+		else {
+			node *tempnode = N.getParent()->getChild();
+			while (strcmp(tempnode->getBro_node()->getName() ,N.getName()) == 0)
+				tempnode->setBro_node(N.getBro_node());
+		}
+	Delete(N);
+	}
 }
 
 node Create()
@@ -96,7 +122,8 @@ void Add(node& N)
 
 bool Search(node N, string target) {
 	char buf[10];
-	strcpy(buf, target.c_str());
+	strcpy_s(buf, target.c_str());
+	//cout << N.getName() << endl;
 	if (strcmp(N.getName() , buf) == 0)
 	{
 		T = 1;
@@ -113,7 +140,7 @@ bool Search(node N, string target) {
 
 bool SearchFile(node N, string target) {
 	char buf[10];
-	strcpy(buf, target.c_str());
+	strcpy_s(buf, target.c_str());
 	if (strcmp(N.getName(), buf) == 0 && N.getType() == 0)
 	{
 		T = 1;
@@ -131,7 +158,7 @@ bool SearchFile(node N, string target) {
 void Write(node N, string filename, int time, int size)
 {
 	char buf[10];
-	strcpy(buf, filename.c_str());
+	strcpy_s(buf, filename.c_str());
 	if (N.getChild())
 		Write(*N.getChild(),filename,time,size);
 	if(N.getBro_node())
@@ -148,7 +175,7 @@ void Write(node N, string filename, int time, int size)
 void Read(node N, string filename, int time)
 {
 	char buf[10];
-	strcpy(buf, filename.c_str());
+	strcpy_s(buf, filename.c_str());
 	if (N.getChild())
 		Read(*N.getChild(), filename, time);
 	if (N.getBro_node())

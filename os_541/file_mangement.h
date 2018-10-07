@@ -6,7 +6,9 @@ static int Size = 100;
 
 static int T = 0;
 
-void Delete(node N);
+void Delete(node &N);
+
+void fileDelete(node &N);
 
 node Create();//¸ù½Úµã
 
