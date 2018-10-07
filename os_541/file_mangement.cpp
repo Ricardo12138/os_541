@@ -138,8 +138,8 @@ void Addtxt(node& N , string filename)
 	(*newnode).setChild(NULL);
 	//cout << "当前节点文件名/目录名:" ;
 	//cin >> name;
-	cout << "请输入(0:文件名；1：目录名)：";
-	cin >> type;
+	//cout << "请输入(0:文件名；1：目录名)：";
+	//cin >> type;
 	/*if (type == 0) {
 		cout << "文件剩余大小为：" << Size << endl;
 		cout << "文件大小：";
@@ -154,6 +154,7 @@ void Addtxt(node& N , string filename)
 		Size = Size - size;
 	}
 	else */
+	type = 0;
 	size = 0;
 	state = 0;
 	//newnode->setName(name);
