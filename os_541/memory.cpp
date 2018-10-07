@@ -16,16 +16,17 @@ STATUS initialization()
 	head->size = MAXSIZE;
 	head->state = FREE;
 	head->address = 0;
+	head->processID = -1;
 	head->next = NULL;
 	return OK;
 }
 
 /*
 ** 连续分区分配内存,采用最佳匹配法
-** 接收参数：请求内存的大小
+** 接收参数：请求内存的大小，进程ID
 ** 分配成功返回该内存块的首地址，否则返回-1
 */
-STATUS allocation(int request)
+STATUS allocation(int request, int processID)
 {
 	cPartition *p = head;
 	cPartition *best = NULL;
@@ -53,11 +54,13 @@ STATUS allocation(int request)
 
 		temp->size = best->size - request;
 		temp->state = FREE;
+		temp->processID = -1;
 		temp->address = best->address + request;
 		temp->next = best->next;
 
 		best->size = request;
 		best->state = BUSY;
+		best->processID = processID;
 		if (temp->size > 0)
 		{
 			best->next = temp;
@@ -109,10 +112,12 @@ STATUS recycle(int address)
 	if (prior->state == BUSY && next->state == BUSY)
 	{
 		p->state = FREE;
+		p->processID = -1;
 	}
 	else if (prior->state == BUSY && next->state == FREE)
 	{
 		p->state = FREE;
+		p->processID = -1;
 		p->size = p->size + next->size;
 		p->next = next->next;
 		free(next);
@@ -150,6 +155,7 @@ useCondition* show()
 	use->address = p->address;
 	use->size = p->size;
 	use->state = p->state;
+	use->processID = p->processID;
 	use->next = NULL;
 
 	p = p->next;
@@ -159,6 +165,7 @@ useCondition* show()
 		temp->address = p->address;
 		temp->size = p->size;
 		temp->state = p->state;
+		temp->processID = p->processID;
 		temp->next = NULL;
 
 		use->next = temp;

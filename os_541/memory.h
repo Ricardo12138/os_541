@@ -11,6 +11,7 @@ typedef struct cPartition
 	int size;				//长度
 	int state;				//状态(0:空闲；1:已分配)
 	int address;			//起始地址
+	int processID;			//内存所分给相应进程的ID,若无进程占用则此值为-1
 	cPartition *next;		//下一个
 }cPartition;
 
@@ -20,6 +21,7 @@ typedef struct useCondition
 	int size;				//长度
 	int state;				//状态(0:空闲；1:已分配)
 	int address;			//起始地址
+	int processID;			//内存所分配给相应进程的ID,若无进程占用则此值为-1
 	useCondition *next;		//下一个
 }useCondition;
 
@@ -31,10 +33,10 @@ STATUS initialization();
 
 /*
 ** 连续分区分配内存,采用最佳匹配法
-** 接收参数：请求内存的大小
+** 接收参数：请求内存的大小,进程ID
 ** 分配成功返回该内存块的首地址，否则返回-1
 */
-STATUS allocation(int request);
+STATUS allocation(int request, int processID);
 
 /*
 ** 连续分区回收内存
