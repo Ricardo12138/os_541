@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Process.h"
 #include "PCB.h"
+#include "TC_ThreadQueue.h"
 
 struct {
 	bool operator()(Process a, Process b) const
@@ -12,7 +13,25 @@ struct {
 		return aPriority < bPriority;
 	}
 } prioritySchedule;
-
+/*
 void prioritySort(deque<Process>& dq) {
-	std::sort(dq.begin(), dq.end(), prioritySchedule);
-}
+	try
+	{
+		std::sort(dq.begin(), dq.end(), prioritySchedule);
+	}
+	catch (exception e)
+	{
+		cout << "****" << endl;
+	}
+}*/
+
+/*void prioritySort(concurrent_queue<Process>& dq) {
+	try
+	{
+		std::sort(dq.begin(), dq.end(), prioritySchedule);
+	}
+	catch (exception e)
+	{
+		cout << "****" << endl;
+	}
+}*/

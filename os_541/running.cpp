@@ -7,8 +7,15 @@ void eraseQueueElem(deque<Process>& dq, Process process)
 	auto last = find(begin(dq), end(dq), process);
 	while (last != end(dq))
 	{
-		dq.erase(last);
-		last = find(begin(dq), end(dq), process);
+		try {
+			dq.erase(last);
+			last = find(begin(dq), end(dq), process);
+		}
+		catch (exception& e) {
+			cout << "**********erase出错***********" << endl;
+			last = find(begin(dq), end(dq), process);
+		}
+		
 	}
 }
 
@@ -28,7 +35,7 @@ pair<bool, bool> runningJob(Process& process)
 	{
 		if (opt.getType() == IT_I)
 		{
-			cout << process.getPCB().getProcessId() << " 被中断 I" << endl;
+			cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 被中断 I" << endl;
 			nowJob.first = id + 1;
 			nowJob.second = (pcb.getJobs())[id + 1].getTime();
 			pcb.setNowJob(nowJob);
@@ -39,7 +46,7 @@ pair<bool, bool> runningJob(Process& process)
 		}
 		else if (opt.getType() == IT_K)
 		{
-			cout << pcb.getProcessId() << " 键盘输入中" << endl;
+			cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 键盘输入中" << endl;
 			pcb.setNowJob(nowJob);
 			process.setWaitIOFlag(true);
 			process.setPCB(pcb);
@@ -48,7 +55,7 @@ pair<bool, bool> runningJob(Process& process)
 		}
 		else if (opt.getType() == IT_P)
 		{
-			cout << pcb.getProcessId() << " 打印机输出中" << endl;
+			cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 打印机输出中" << endl;
 			pcb.setNowJob(nowJob);
 			process.setWaitIOFlag(true);
 			process.setPCB(pcb);
@@ -59,21 +66,21 @@ pair<bool, bool> runningJob(Process& process)
 		{
 			if (opt.getType() == IT_W)
 			{
-				cout << process.getPCB().getProcessId() << " 写文件中 W" << endl;
+				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 写文件中 W" << endl;
 				Sleep(lastTime * TIME);//把剩余的时间执行完
 				result.first = false;//正常没结束
 				result.second = false;
 			}
 			else if (opt.getType() == IT_R)
 			{
-				cout << process.getPCB().getProcessId() << " 读文件中 R" << endl;
+				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 读文件中 R" << endl;
 				Sleep(lastTime * TIME);//把剩余的时间执行完
 				result.first = false;//正常没结束
 				result.second = false;
 			}
 			else if (opt.getType() == IT_C)
 			{
-				cout << process.getPCB().getProcessId() << " 计算中 C" << endl;
+				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 计算中 C" << endl;
 				Sleep(lastTime * TIME);//把剩余的时间执行完
 				result.first = false;//正常没结束
 				result.second = false;
@@ -92,7 +99,7 @@ pair<bool, bool> runningJob(Process& process)
 	{
 		result.first = true;
 		result.second = true;
-		cout << process.getPCB().getProcessId() << " 退出 Q" << endl;
+		cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 退出 Q" << endl;
 		process.setIsLiveFlag(false);
 	}
 	return result;
@@ -112,20 +119,23 @@ void running()
 			{
 				Process processNew = process;
 				readyQueue.push_back(processNew); //加到就绪队列 
-				eraseQueueElem(runningQueue, process);//从运行队列移除
+				runningQueue.pop_front();
+				//eraseQueueElem(runningQueue, process);//从运行队列移除
 			}
 			if (!result.first && result.second)//IO
 			{
 				Process processNew = process;
 				waitingQueue.push_back(processNew);//加入到等待队列
-				eraseQueueElem(runningQueue, process);//从运行队列移除
+				runningQueue.pop_front();
+				//eraseQueueElem(runningQueue, process);//从运行队列移除
 			}
 			if (result.first && result.second) //结束
 			{
 				Process processNew = process;
 				terminatedQueue.push_back(process);
-				eraseQueueElem(runningQueue, process);
-				eraseQueueElem(readyQueue, process);
+				runningQueue.pop_front();
+				//eraseQueueElem(runningQueue, process);
+				//eraseQueueElem(readyQueue, process);
 			}
 		}
 	}

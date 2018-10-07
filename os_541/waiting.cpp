@@ -21,7 +21,7 @@ void waiting()
 			if (opt.getType() == IT_K)//键盘输入
 			{
 				Sleep(lastTime * TIME);//模拟IO输入的时间
-				cout << pcb.getProcessId() << " 键盘输入结束" << endl;
+				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 键盘输入结束" << endl;
 				nowJob.first = id + 1;
 				nowJob.second = (pcb.getJobs())[id + 1].getTime();
 				pcb.setNowJob(nowJob);
@@ -29,14 +29,15 @@ void waiting()
 				process.setFinishIOFlag(true);
 				Process newProcess = process;
 				readyQueue.push_back(newProcess);
-				eraseQueueElem(waitingQueue, process);
+				waitingQueue.pop_front();
+				//eraseQueueElem(waitingQueue, process);
 
 			}
 			else if (opt.getType() == IT_P)//打印机输出
 			{
 				
 				Sleep(lastTime * TIME);//模拟IO输入的时间
-				cout << pcb.getProcessId() << " 打印机输出结束" << endl;
+				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 打印机输出结束" << endl;
 				nowJob.first = id + 1;
 				nowJob.second = (pcb.getJobs())[id + 1].getTime();
 				pcb.setNowJob(nowJob);
@@ -44,7 +45,8 @@ void waiting()
 				process.setFinishIOFlag(true);
 				Process newProcess = process;
 				readyQueue.push_back(newProcess);
-				eraseQueueElem(waitingQueue, process);
+				waitingQueue.pop_front();
+				//eraseQueueElem(waitingQueue, process);
 			}
 			else
 			{

@@ -9,9 +9,12 @@ void readyFCFS()
 	{
 		if (!readyQueue.empty())
 		{
-			Process process = readyQueue.front();
-			runningQueue.push_back(process);
-			readyQueue.pop_front();
+			if (runningQueue.empty())
+			{
+				Process process = readyQueue.front();
+				runningQueue.push_back(process);
+				readyQueue.pop_front();
+			}
 		}
 		//Sleep(TIME);
 	}
@@ -24,10 +27,14 @@ void readyPRIORITY()
 		//Sleep(TIME);
 		if (!readyQueue.empty())
 		{
-			prioritySort(readyQueue);	//先按照优先级排序
-			Process process = readyQueue.front();
-			runningQueue.push_back(process);
-			readyQueue.pop_front();
+			//prioritySort(readyQueue);	//先按照优先级排序
+			readyQueue.prioritySort1();
+			if (runningQueue.empty())
+			{
+				Process process = readyQueue.front();
+				runningQueue.push_back(process);
+				readyQueue.pop_front();
+			}
 		}
 	}
 }

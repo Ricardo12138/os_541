@@ -1,84 +1,90 @@
 #pragma once
-#include"stdafx.h"
 
-template<typename T, typename D = deque<T> >
-class TC_ThreadQueue : protected TC_ThreadLock
+template<typename Data>
+class concurrent_queue
 {
+private:
+	std::deque<Data> the_queue;
+	std::mutex the_mutex;
+	std::condition_variable the_condition_variable;
+
 public:
-	typedef D queue_type;
-	bool pop_front(T& t, size_t millsecond = 0)
+	void push_back(Data const& data)
 	{
-		Lock lock(*this);
-		if (_queue.empty())
+#if 0
+		std::lock_guard<std::mutex> lock(the_mutex);
+		the_queue.push(data);
+		lock.unlock();
+#else   //利用作用域自动释放锁，防止异常崩溃场景
 		{
-			if (millsecond == 0)
-			{
-				return false;
-			}
-			timedWait(millsecond);
+			std::lock_guard<std::mutex> lock(the_mutex);
+			the_queue.push_back(data);
 		}
-		if (_queue.empty())	
+#endif
+		the_condition_variable.notify_one();
+	}
+
+	bool empty()
+	{
+		std::lock_guard<std::mutex> lock(the_mutex);
+		return the_queue.empty();
+	}
+
+	//获取队列头部的值，并移除队列头部
+	bool try_pop(Data& popped_value)
+	{
+		std::lock_guard<std::mutex> lock(the_mutex);
+		if (the_queue.empty())
 		{
 			return false;
 		}
-		t = _queue.front();
-		_queue.pop_front(); 
+
+		popped_value = the_queue.front();
+		the_queue.pop_front();
 		return true;
 	}
 
-	void notifyT()
+	void pop_front()
 	{
-		Lock lock(*this);
-		notifyAll();
+		//cout << the_queue.size() << endl;
+		std::lock_guard<std::mutex> lock(the_mutex);
+		Process process = the_queue.front();
+		the_queue.pop_front();
 	}
 
-	void push_back(const T& t)
+	Data& front()
 	{
-		Lock lock(*this);
-		if (_queue.empty())
-		{
-			notifyAll();
-		}	_queue.push_back(t);
+		std::lock_guard<std::mutex> lock(the_mutex);
+		return the_queue.front();
 	}
-		
-	bool swap(queue_type &q, size_t millsecond = 0)
+
+	//等待队列有值，再弹出队列的头部
+	void wait_and_pop(Data& popped_value)
 	{
-		Lock lock(*this);
-		if (_queue.empty())
+		std::lock_guard<std::mutex> lock(the_mutex);
+		while (the_queue.empty())
 		{
-			if (millsecond == 0)
-			{
-				return false;
-			}
-			timedWait(millsecond);
+			the_condition_variable.wait(lock);
 		}
-		if (_queue.empty())
+
+		popped_value = the_queue.front();
+		the_queue.pop_front();
+	}
+
+	struct {
+		bool operator()(Process a, Process b) const
 		{
-			return false;
+			PCB aPCB = a.getPCB();
+			PCB bPCB = b.getPCB();
+			int aPriority = aPCB.getPriority();
+			int bPriority = bPCB.getPriority();
+			return aPriority < bPriority;
 		}
-		q.swap(_queue);
-		return true;
+	} prioritySchedule1;
+
+	void prioritySort1() {
+		std::lock_guard<std::mutex> lock(the_mutex);
+		std::sort(the_queue.begin(), the_queue.end(), prioritySchedule1);
 	}
-		
-	size_t size() const
-	{
-		Lock lock(*this);
-		return _queue.size();
-	}
-		
-	void clear()
-	{
-		Lock lock(*this);
-		_queue.clear();
-	}
-		
-	bool empty() const
-	{
-		Lock lock(*this);
-		return _queue.empty();
-	}
-protected:
-		
-	queue_type _queue;
+
 };
-

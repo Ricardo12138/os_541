@@ -22,6 +22,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <set>
+#include <queue>
+#include <mutex>
 
 
 // TODO: 在此处引用程序需要的其他头文件
