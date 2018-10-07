@@ -1,6 +1,7 @@
 #include "running.h"
 #include "stdafx.h"
 #include "global.h"
+#include "file_mangement.h"
 
 void eraseQueueElem(deque<Process>& dq, Process process)
 {
@@ -67,14 +68,18 @@ pair<bool, bool> runningJob(Process& process)
 			if (opt.getType() == IT_W)
 			{
 				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 写文件中 W" << endl;
-				Sleep(lastTime * TIME);//把剩余的时间执行完
+				fileWrite(opt.getFileName(), lastTime * TIME, opt.getFileSize());
+				//Sleep(lastTime * TIME);//把剩余的时间执行完
 				result.first = false;//正常没结束
 				result.second = false;
 			}
 			else if (opt.getType() == IT_R)
 			{
 				cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 读文件中 R" << endl;
-				Sleep(lastTime * TIME);//把剩余的时间执行完
+				bool hasFile = fileRead(opt.getFileName(), lastTime * TIME);
+				if(!hasFile)
+					cout << "PID:" << process.getPCB().getProcessId() << " / Priority:" << process.getPCB().getPriority() << " / 没有该文件 " << opt.getFileName() << endl;
+				//Sleep(lastTime * TIME);//把剩余的时间执行完
 				result.first = false;//正常没结束
 				result.second = false;
 			}
