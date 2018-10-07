@@ -19,7 +19,7 @@ using namespace std;
 int main()
 {
 	
-	
+	/*
 	//薛顺国的main
 	
 	node root;
@@ -60,7 +60,7 @@ int main()
 	}
 
 	getchar();
-
+	*/
 	/**
 	 *cyw main
 	 */
@@ -100,13 +100,15 @@ int main()
 	readyQueue.push_back(process3);
 	readyQueue.push_back(process4);
 	readyQueue.push_back(process5);*/
-
+	Root = Create(); 
 	initialization();
 	produce(job1);
 	produce(job2);
 	produce(job3);
 	produce(job4);
 	produce(job5);
+	
+	run();
 	
 	//run1();
 	/*run();//启动线程 
