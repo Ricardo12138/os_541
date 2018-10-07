@@ -62,12 +62,12 @@ node Create()
 	return newnode;
 }
 
-void Add(node& N)
+node * Add(node& N)
 {
 	if (N.getType() == 0)
 	{
 		cout << N.getName() << "是文件名，不能创建下一级" << endl;
-		return;
+		return NULL;
 	}
 	node *newnode = new node;
 	node *tempnode;
@@ -87,7 +87,60 @@ void Add(node& N)
 	//cin >> name;
 	cout << "请输入(0:文件名；1：目录名)：";
 	cin >> type;
-	if (type == 0) {
+	//if (type == 0) {
+		/*cout << "文件剩余大小为：" << Size << endl;
+		cout << "文件大小：";
+		cin >> size;
+		while (Size < size)
+		{
+			cout << "文件剩余大小为：" << Size << endl;
+			cout << "请重新输入：" << endl;
+			cout << "文件大小：";
+			cin >> size;
+		}
+		Size = Size - size;
+	}
+	else */
+	size = 0;
+	state = 0;
+	//newnode->setName(name);
+	(*newnode).setType(type);
+	(*newnode).setSize(size);
+	(*newnode).setState(state);
+
+
+	//找上一个兄弟
+	if (N.getChild() == NULL)
+		N.setChild(newnode);
+
+	else {
+		tempnode = N.getChild();
+		while (tempnode->getBro_node() != NULL)
+			tempnode = tempnode->getBro_node();
+		tempnode->setBro_node(newnode);
+	}
+	return newnode;
+}
+
+void Addtxt(node& N , string filename)
+{
+	node *newnode = new node;
+	node *tempnode;
+	char name[10];
+	strcpy_s(name, filename.c_str());
+	bool type;
+	int size;
+	int state;
+
+	(*newnode).setName(name);
+	(*newnode).setParent(&N);
+	(*newnode).setBro_node(NULL);
+	(*newnode).setChild(NULL);
+	//cout << "当前节点文件名/目录名:" ;
+	//cin >> name;
+	cout << "请输入(0:文件名；1：目录名)：";
+	cin >> type;
+	/*if (type == 0) {
 		cout << "文件剩余大小为：" << Size << endl;
 		cout << "文件大小：";
 		cin >> size;
@@ -100,7 +153,8 @@ void Add(node& N)
 		}
 		Size = Size - size;
 	}
-	else size = 0;
+	else */
+	size = 0;
 	state = 0;
 	//newnode->setName(name);
 	(*newnode).setType(type);
@@ -193,7 +247,7 @@ void fileWrite(string filename, int time, int size) {
 	if (result == 1)
 		Write(Root, filename, time, size);
 	else {
-		Add(Root);
+		Addtxt(Root, filename);
 		Write(Root, filename, time, size);
 	}
 }
