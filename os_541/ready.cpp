@@ -1,9 +1,7 @@
 #include "ready.h"
 #include "stdafx.h"
-#include "global.h"
-#include "scheduleAlgorithm.h"
 
-void readyFCFS()
+void readyThread::readyFCFS()
 {
 	while (true)
 	{
@@ -17,10 +15,11 @@ void readyFCFS()
 			}
 		}
 		//Sleep(TIME);
+        msleep(100);
 	}
 }
 
-void readyPRIORITY()
+void readyThread::readyPRIORITY()
 {
 	while (true)
 	{
@@ -36,6 +35,7 @@ void readyPRIORITY()
 				readyQueue.pop_front();
 			}
 		}
+        msleep(100);
 	}
 }
 
@@ -47,4 +47,13 @@ void ready(string scheduleType)
 		readyPRIORITY();
 	else
 		cout << "没有该类型的调度算法" << endl;
+}
+
+void readyThread::run(){
+    if (scheduleType == SA_FCFS)
+        readyFCFS();
+    else if (scheduleType == SA_PRIORITY)
+        readyPRIORITY();
+    else
+        cout << "没有该类型的调度算法" << endl;
 }
