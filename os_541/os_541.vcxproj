@@ -146,6 +146,7 @@
     <ClInclude Include="Operation.h" />
     <ClInclude Include="PCB.h" />
     <ClInclude Include="Process.h" />
+    <ClInclude Include="ProducerConsumer.h" />
     <ClInclude Include="ready.h" />
     <ClInclude Include="run.h" />
     <ClInclude Include="running.h" />
@@ -165,6 +166,7 @@
     <ClCompile Include="os_541.cpp" />
     <ClCompile Include="PCB.cpp" />
     <ClCompile Include="Process.cpp" />
+    <ClCompile Include="ProducerConsumer.cpp" />
     <ClCompile Include="ready.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="running.cpp" />
