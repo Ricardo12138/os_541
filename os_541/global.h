@@ -29,7 +29,7 @@ const vector<string> job1 = { "C 10", "I", "R 4 a 20", "C 5", "W 4 a 20", "C 2",
 const vector<string> job2 = { "C 3", "K 10", "C 2", "W 5 b 40", "C 5", "P 20", "C 3", "Q" };
 const vector<string> job3 = { "K 4", "C 3", "P 5", "Q" };
 const vector<string> job4 = { "C 9", "C 5", "C 10", "Q" };
-const vector<string> job5 = { "R 4 a 10", "I", "W 4 a 10", "Q" };
+const vector<string> job5 = { "C 5", "I", "W 4 a 10","R 4 a 10", "P 10", "Q" };
 
 //œµÕ≥ ±÷”
 const int TIME = 1000;

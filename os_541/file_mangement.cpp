@@ -2,22 +2,48 @@
 #include "file_mangement.h"
 #include"global.h"
 
-void Delete(node N)
+void Delete(node &N)
 {
-	if (N.getChild())
-		Delete(*N.getChild());
-	Size = N.getSize() + Size;
+		if (N.getBro_node())
+			Delete(*N.getBro_node());
+		if (N.getChild())
+			Delete(*N.getChild());
 
-	if (N.getParent()->getChild()->getName() == N.getName())
-		N.getParent()->setChild(N.getBro_node());
-	else {
-		node *tempnode = N.getParent()->getChild();
-		while (tempnode->getBro_node()->getName() == N.getName())
-			tempnode = tempnode->getBro_node();
-		tempnode->setBro_node(N.getBro_node());
-	}
-
+		if (N.getState() == 0)
+			Size = N.getSize() + Size;
+		if (N.getParent())
+		{
+			if (N.getParent()->getChild()->getName() == N.getName())//是父亲的第一个孩子
+				N.getParent()->setChild(N.getBro_node());
+			else {
+				node *tempnode = N.getParent()->getChild();
+				while (tempnode->getBro_node()->getName() == N.getName())
+					tempnode = tempnode->getBro_node();
+				tempnode->setBro_node(N.getBro_node());
+			}
+		}
+	N.setBro_node(NULL);
+	N.setChild(NULL);
 	delete &N;
+}
+
+void fileDelete(node &N)
+{
+	if (N.getParent() == NULL)
+		Delete(N);
+	else {
+		if (strcmp(N.getParent()->getChild()->getName() ,N.getName()) == 0)
+		{
+			N.getParent()->setChild(N.getBro_node());
+			N.setBro_node(NULL);
+		}
+		else {
+			node *tempnode = N.getParent()->getChild();
+			while (strcmp(tempnode->getBro_node()->getName() ,N.getName()) == 0)
+				tempnode->setBro_node(N.getBro_node());
+		}
+	Delete(N);
+	}
 }
 
 node Create()
@@ -36,12 +62,12 @@ node Create()
 	return newnode;
 }
 
-void Add(node& N)
+node * Add(node& N)
 {
 	if (N.getType() == 0)
 	{
 		cout << N.getName() << "是文件名，不能创建下一级" << endl;
-		return;
+		return NULL;
 	}
 	node *newnode = new node;
 	node *tempnode;
@@ -61,7 +87,60 @@ void Add(node& N)
 	//cin >> name;
 	cout << "请输入(0:文件名；1：目录名)：";
 	cin >> type;
-	if (type == 0) {
+	//if (type == 0) {
+		/*cout << "文件剩余大小为：" << Size << endl;
+		cout << "文件大小：";
+		cin >> size;
+		while (Size < size)
+		{
+			cout << "文件剩余大小为：" << Size << endl;
+			cout << "请重新输入：" << endl;
+			cout << "文件大小：";
+			cin >> size;
+		}
+		Size = Size - size;
+	}
+	else */
+	size = 0;
+	state = 0;
+	//newnode->setName(name);
+	(*newnode).setType(type);
+	(*newnode).setSize(size);
+	(*newnode).setState(state);
+
+
+	//找上一个兄弟
+	if (N.getChild() == NULL)
+		N.setChild(newnode);
+
+	else {
+		tempnode = N.getChild();
+		while (tempnode->getBro_node() != NULL)
+			tempnode = tempnode->getBro_node();
+		tempnode->setBro_node(newnode);
+	}
+	return newnode;
+}
+
+void Addtxt(node& N , string filename)
+{
+	node *newnode = new node;
+	node *tempnode;
+	char name[10];
+	strcpy_s(name, filename.c_str());
+	bool type;
+	int size;
+	int state;
+
+	(*newnode).setName(name);
+	(*newnode).setParent(&N);
+	(*newnode).setBro_node(NULL);
+	(*newnode).setChild(NULL);
+	//cout << "当前节点文件名/目录名:" ;
+	//cin >> name;
+	//cout << "请输入(0:文件名；1：目录名)：";
+	//cin >> type;
+	/*if (type == 0) {
 		cout << "文件剩余大小为：" << Size << endl;
 		cout << "文件大小：";
 		cin >> size;
@@ -74,7 +153,9 @@ void Add(node& N)
 		}
 		Size = Size - size;
 	}
-	else size = 0;
+	else */
+	type = 0;
+	size = 0;
 	state = 0;
 	//newnode->setName(name);
 	(*newnode).setType(type);
@@ -96,7 +177,8 @@ void Add(node& N)
 
 bool Search(node N, string target) {
 	char buf[10];
-	strcpy(buf, target.c_str());
+	strcpy_s(buf, target.c_str());
+	//cout << N.getName() << endl;
 	if (strcmp(N.getName() , buf) == 0)
 	{
 		T = 1;
@@ -113,7 +195,7 @@ bool Search(node N, string target) {
 
 bool SearchFile(node N, string target) {
 	char buf[10];
-	strcpy(buf, target.c_str());
+	strcpy_s(buf, target.c_str());
 	if (strcmp(N.getName(), buf) == 0 && N.getType() == 0)
 	{
 		T = 1;
@@ -131,7 +213,7 @@ bool SearchFile(node N, string target) {
 void Write(node N, string filename, int time, int size)
 {
 	char buf[10];
-	strcpy(buf, filename.c_str());
+	strcpy_s(buf, filename.c_str());
 	if (N.getChild())
 		Write(*N.getChild(),filename,time,size);
 	if(N.getBro_node())
@@ -148,7 +230,7 @@ void Write(node N, string filename, int time, int size)
 void Read(node N, string filename, int time)
 {
 	char buf[10];
-	strcpy(buf, filename.c_str());
+	strcpy_s(buf, filename.c_str());
 	if (N.getChild())
 		Read(*N.getChild(), filename, time);
 	if (N.getBro_node())
@@ -166,7 +248,7 @@ void fileWrite(string filename, int time, int size) {
 	if (result == 1)
 		Write(Root, filename, time, size);
 	else {
-		Add(Root);
+		Addtxt(Root, filename);
 		Write(Root, filename, time, size);
 	}
 }
