@@ -93,6 +93,9 @@
     <ClInclude Include="TC_ThreadQueue.h">
       <Filter>头文件\class</Filter>
     </ClInclude>
+    <ClInclude Include="ProducerConsumer.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -142,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="file_mangement.cpp">
       <Filter>源文件\file</Filter>
+    </ClCompile>
+    <ClCompile Include="ProducerConsumer.cpp">
+      <Filter>源文件\utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
