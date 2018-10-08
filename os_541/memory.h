@@ -5,6 +5,7 @@
 #define MAXSIZE 640			//内存容量为640KB,若要更改,请在这更改
 typedef int STATUS;
 
+#ifndef CPART
 //连续分区数据结构，基于链表
 typedef struct cPartition
 {
@@ -24,7 +25,8 @@ typedef struct useCondition
 	int processID;			//内存所分配给相应进程的ID,若无进程占用则此值为-1
 	useCondition *next;		//下一个
 }useCondition;
-
+#define CPART
+#endif
 /*
 ** 连续分区初始化
 ** 初始化成功返回1，否则返回-1
@@ -49,4 +51,4 @@ STATUS recycle(int address);
 ** 内存的使用情况
 ** 用链表形式返回内存的使用情况
 */
-useCondition* show();
+useCondition* showMem();

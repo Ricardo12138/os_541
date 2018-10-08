@@ -3,11 +3,11 @@
 #include "global.h"
 #include "scheduleAlgorithm.h"
 #include <QThread>
-void readyFCFS();
+//void readyFCFS();
 
-void readyPRIORITY();
+//void readyPRIORITY();
 
-void ready(string scheduleType);
+//void ready(string scheduleType);
 
 class readyThread:public QThread
 {

@@ -1,7 +1,4 @@
 #include "running.h"
-#include "stdafx.h"
-#include "global.h"
-#include "file_mangement.h"
 
 void eraseQueueElem(deque<Process>& dq, Process process)
 {
@@ -144,4 +141,40 @@ void running()
 			}
 		}
 	}
+}
+
+void runningThread::run(){
+    while (true)
+    {
+        if (!runningQueue.empty())
+        {
+            Process& process = runningQueue.front();
+            //runningQueue.pop_front();
+
+            pair<bool, bool> result = runningJob(process);//执行任务
+            if (result.first && !result.second)//被中断
+            {
+                Process processNew = process;
+                readyQueue.push_back(processNew); //加到就绪队列
+                runningQueue.pop_front();
+                //eraseQueueElem(runningQueue, process);//从运行队列移除
+            }
+            if (!result.first && result.second)//IO
+            {
+                Process processNew = process;
+                waitingQueue.push_back(processNew);//加入到等待队列
+                runningQueue.pop_front();
+                //eraseQueueElem(runningQueue, process);//从运行队列移除
+            }
+            if (result.first && result.second) //结束
+            {
+                Process processNew = process;
+                terminatedQueue.push_back(process);
+                runningQueue.pop_front();
+                //eraseQueueElem(runningQueue, process);
+                //eraseQueueElem(readyQueue, process);
+            }
+        }
+        msleep(10);
+    }
 }

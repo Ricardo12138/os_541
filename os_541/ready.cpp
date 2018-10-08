@@ -15,7 +15,7 @@ void readyThread::readyFCFS()
 			}
 		}
 		//Sleep(TIME);
-        msleep(100);
+        msleep(10);
 	}
 }
 
@@ -35,10 +35,10 @@ void readyThread::readyPRIORITY()
 				readyQueue.pop_front();
 			}
 		}
-        msleep(100);
+        msleep(10);
 	}
 }
-
+/*
 void ready(string scheduleType)
 {
 	if (scheduleType == SA_FCFS)
@@ -48,7 +48,7 @@ void ready(string scheduleType)
 	else
 		cout << "没有该类型的调度算法" << endl;
 }
-
+*/
 void readyThread::run(){
     if (scheduleType == SA_FCFS)
         readyFCFS();

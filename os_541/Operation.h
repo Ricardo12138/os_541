@@ -1,5 +1,5 @@
 #pragma once
-
+#include "stdafx.h"
 //操作类。把任务划分成各个操作
 class Operation
 {

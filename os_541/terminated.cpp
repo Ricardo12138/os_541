@@ -1,7 +1,4 @@
 #include "terminated.h"
-#include"stdafx.h"
-#include"global.h"
-#include"memory.h"
 
 void terminated()
 {
@@ -19,4 +16,22 @@ void terminated()
 			terminatedQueue.pop_front();
 		}
 	}
+}
+
+void terminatedThread::run(){
+    while (1)
+    {
+        if (!terminatedQueue.empty())
+        {
+            Process pro = terminatedQueue.front();
+            PCB pcb = pro.getPCB();
+            if (recycle(pcb.getaddr()))
+            {
+                cout << "recycle error!" << endl;
+                return;
+            }
+            terminatedQueue.pop_front();
+        }
+        msleep(10);
+    }
 }

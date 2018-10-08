@@ -4,6 +4,23 @@
 #include <QMainWindow>
 #include <QIcon>
 #include <string>
+#include <QThread>
+#include "../os_541/file.h"
+#include "../os_541/file_mangement.h"
+#include "../os_541/global.h"
+#include "../os_541/memory.h"
+#include "../os_541/new.h"
+#include "../os_541/run.h"
+#include "../os_541/Operation.h"
+#include "../os_541/PCB.h"
+#include "../os_541/Process.h"
+#include "../os_541/ready.h"
+#include "../os_541/running.h"
+#include "../os_541/scheduleAlgorithm.h"
+#include "../os_541/targetver.h"
+#include "../os_541/TC_ThreadQueue.h"
+#include "../os_541/terminated.h"
+#include "../os_541/waiting.h"
 using namespace std;
 
 namespace Ui {
@@ -15,6 +32,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
+    new_detect_thread NewDetectThread;
+    readyThread * ReadyThread=new readyThread("FCFS");
+    runningThread RunningThread;
+    waitingThread WaitingThread;
+    terminatedThread TerminatedThread;
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -30,6 +54,7 @@ public slots:
     void message(std::string msg);
     void refreshMem(int add);
     void removeItem(bool);
+    void changeStrategy(int);
 
 private:
     Ui::MainWindow *ui;

@@ -146,7 +146,7 @@ STATUS recycle(int address)
 ** 内存的使用情况
 ** 用链表形式返回内存的使用情况
 */
-useCondition* show()
+useCondition* showMem()
 {
 	cPartition *p = head;
 

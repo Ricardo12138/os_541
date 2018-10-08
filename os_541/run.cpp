@@ -10,13 +10,13 @@
 void run()
 {
 	thread newThread(new_detect);
-	thread readyThread(ready, "FCFS");
+//	thread readyThread(ready, "FCFS");
 	thread runningThread(running);
 	thread waitingThread(waiting);
 	thread terminatedThread(terminated);
 
 	newThread.join();
-	readyThread.join();
+//	readyThread.join();
 	runningThread.join();
 	waitingThread.join();
 	terminatedThread.join();

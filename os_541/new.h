@@ -4,6 +4,7 @@
 #include"global.h"
 #include"memory.h"
 #include <QThread>
+
 void produce();
 void produce(int priority);
 void produce(vector<string> job);
@@ -13,4 +14,6 @@ class new_detect_thread:public QThread
     Q_OBJECT
 public:
     void run();
+signals:
+    void newThread(string);
 };

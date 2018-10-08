@@ -44,7 +44,7 @@
            </column>
            <column>
             <property name="text">
-             <string>长度</string>
+             <string>大小</string>
             </property>
            </column>
            <column>
@@ -121,7 +121,7 @@
          <item>
           <widget class="QPushButton" name="IOFinPushButton">
            <property name="text">
-            <string>中断</string>
+            <string>结束IO</string>
            </property>
           </widget>
          </item>
@@ -135,7 +135,7 @@
          <item>
           <widget class="QPushButton" name="intePushButton">
            <property name="text">
-            <string>结束IO</string>
+            <string>中断</string>
            </property>
           </widget>
          </item>
@@ -232,6 +232,20 @@
            <property name="text">
             <string>新建任务</string>
            </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="strategyComboBox">
+           <item>
+            <property name="text">
+             <string>LRU</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>FIFO</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>

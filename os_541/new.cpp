@@ -172,5 +172,7 @@ void new_detect_thread::run(){
             }
 
         }
+        emit newThread("new thread");
+        msleep(10);
     }
 }

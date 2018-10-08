@@ -6,7 +6,7 @@ Dialog::Dialog(QWidget *parent) :
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
-    connect(ui->OKPushButton,&QPushButton::clicked,this,Dialog::sendData);
+    connect(ui->OKPushButton,&QPushButton::clicked,this,&Dialog::sendData);
 }
 
 Dialog::~Dialog()
